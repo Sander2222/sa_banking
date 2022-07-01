@@ -22,42 +22,16 @@ AddEventHandler('sa_banking:Withdraw', function(amount)
     local xPlayer = ESX.GetPlayerFromId(_source)
     local balance = xPlayer.getAccount('bank').money 
     local amount = tonumber(amount)
-    local steamid  = false
-    local license  = false
-    local discord  = false
-    local xbl      = false
-    local liveid   = false
-    local ip       = false
-
-  for k,v in pairs(GetPlayerIdentifiers(source))do
-        
-      if string.sub(v, 1, string.len("steam:")) == "steam:" then
-        steamid = v
-      elseif string.sub(v, 1, string.len("license:")) == "license:" then
-        license = v
-      elseif string.sub(v, 1, string.len("xbl:")) == "xbl:" then
-        xbl  = v
-      elseif string.sub(v, 1, string.len("ip:")) == "ip:" then
-        ip = v
-      elseif string.sub(v, 1, string.len("discord:")) == "discord:" then
-        discord = v
-      elseif string.sub(v, 1, string.len("live:")) == "live:" then
-        liveid = v
-      end
-    
-  end
-
 
     if amount == nil or amount <= 0 then
-        TriggerClientEvent('bcs_radialmenu:showNotify',_source, 'Bank', 'Auszahlen', 'Du hast keinen gültigen Betrag angegeben',  'CHAR_BANK_MAZE')
+      TriggerClientEvent('esx:showAdvancedNotification', _source, Language['Bank'], Language['Withdraw'], Language['NotValid'], Language['NotifyIcon'], 3)
     else 
         if amount <= balance then
             xPlayer.removeAccountMoney('bank', amount)
             xPlayer.addMoney(amount)
-            TriggerClientEvent('bcs_radialmenu:showNotify',_source, 'Bank', 'Auszahlen', 'Du hast: ~g~' ..amount.. '~w~$ ausgezahlt',  'CHAR_BANK_MAZE')
-            TriggerEvent('webhook:SendWebHook', 23295, 'https://discord.com/api/webhooks/966823677796704326/FYbW0wl_2Vr9KoPYBSSm9Mplxv45KqLYQ-0p5zv5q7YgOieLPMF5VvxL0GQfh44osNAY', 'Bank logs', 'Der Spieler: **' ..xPlayer.getName().. '** hat: **' ..amount.. '** ausgezahlt. \n \n ' ..discord.. '\n' ..steamid.. '', 'Discord Logs', _source)
+            TriggerClientEvent('esx:showAdvancedNotification', _source, Language['Bank'], Language['Withdraw'], Language['WithdrawMoney'] ..amount.. Language['money'], Language['NotifyIcon'], 3)
         else
-            TriggerClientEvent('bcs_radialmenu:showNotify',_source, 'Bank', 'Auszahlen', 'Du hast nicht genug ~r~Geld~w~ auf deinem Konto',  'CHAR_BANK_MAZE')
+          TriggerClientEvent('esx:showAdvancedNotification', _source, Language['Bank'], Language['Withdraw'], Language['NotEnoughMoney'], Language['NotifyIcon'], 3)
         end
     end
 end)
@@ -70,39 +44,14 @@ AddEventHandler('sa_banking:Deposit', function(amount)
     local xPlayer = ESX.GetPlayerFromId(_source)
     local amount = tonumber(amount)
     local HandMoney = xPlayer.getMoney()
-    local steamid  = false
-    local license  = false
-    local discord  = false
-    local xbl      = false
-    local liveid   = false
-    local ip       = false
-
-  for k,v in pairs(GetPlayerIdentifiers(source))do
-        
-      if string.sub(v, 1, string.len("steam:")) == "steam:" then
-        steamid = v
-      elseif string.sub(v, 1, string.len("license:")) == "license:" then
-        license = v
-      elseif string.sub(v, 1, string.len("xbl:")) == "xbl:" then
-        xbl  = v
-      elseif string.sub(v, 1, string.len("ip:")) == "ip:" then
-        ip = v
-      elseif string.sub(v, 1, string.len("discord:")) == "discord:" then
-        discord = v
-      elseif string.sub(v, 1, string.len("live:")) == "live:" then
-        liveid = v
-      end
-    
-  end
 
     if amount == nil or amount <= 0 then
-        TriggerClientEvent('bcs_radialmenu:showNotify',_source, 'Bank', 'Einzahlen', 'Du hast keinen gültigen Betrag angegeben',  'CHAR_BANK_MAZE')
+      TriggerClientEvent('esx:showAdvancedNotification', _source, Language['Bank'], Language['Deposit'], Language['NotValid'], Language['NotifyIcon'], 3)
     else
         if amount <= HandMoney then
             xPlayer.removeMoney(amount)
             xPlayer.addAccountMoney('bank', tonumber(amount))
-            TriggerClientEvent('bcs_radialmenu:showNotify',_source, 'Bank', 'Einzahlen', 'Du hast: ~g~' ..amount.. '~w~$ eingezahlt',  'CHAR_BANK_MAZE')
-            TriggerEvent('webhook:SendWebHook', 23295, 'https://discord.com/api/webhooks/966823677796704326/FYbW0wl_2Vr9KoPYBSSm9Mplxv45KqLYQ-0p5zv5q7YgOieLPMF5VvxL0GQfh44osNAY', 'Bank logs', 'Der Spieler: **' ..xPlayer.getName().. '** hat: **' ..amount.. '** eingezahlt. \n \n ' ..discord.. '\n' ..steamid.. '', 'Discord Logs', _source)
+                  TriggerClientEvent('esx:showAdvancedNotification', _source, Language['Bank'], Language['Deposit'], Language['DepositMoney'] ..amount.. Language['money'], Language['NotifyIcon'], 3)
         else
             TriggerClientEvent('bcs_radialmenu:showNotify',_source, 'Bank', 'Einzahlen', 'Du hast nicht genug ~r~Geld~w~ auf deinem Konto',  'CHAR_BANK_MAZE')
         end

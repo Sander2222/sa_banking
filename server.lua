@@ -51,9 +51,9 @@ AddEventHandler('sa_banking:Deposit', function(amount)
         if amount <= HandMoney then
             xPlayer.removeMoney(amount)
             xPlayer.addAccountMoney('bank', tonumber(amount))
-                  TriggerClientEvent('esx:showAdvancedNotification', _source, Language['Bank'], Language['Deposit'], Language['DepositMoney'] ..amount.. Language['money'], Language['NotifyIcon'], 3)
+            TriggerClientEvent('esx:showAdvancedNotification', _source, Language['Bank'], Language['Deposit'], Language['DepositMoney'] ..amount.. Language['money'], Language['NotifyIcon'], 3)
         else
-            TriggerClientEvent('bcs_radialmenu:showNotify',_source, 'Bank', 'Einzahlen', 'Du hast nicht genug ~r~Geld~w~ auf deinem Konto',  'CHAR_BANK_MAZE')
+          TriggerClientEvent('esx:showAdvancedNotification', _source, Language['Bank'], Language['Deposit'], Language['NotEnoughMoney'], Language['NotifyIcon'], 3)
         end
     end
 end)
@@ -72,18 +72,18 @@ AddEventHandler('sa_banking:Transfer', function(amount, Target)
         --idk warum das funktioniert, aber es funktioniert
         if xPlayer == xTarget then
             if balance <= 0 or balance < amount or amount <= 0 then
-                TriggerClientEvent('bcs_radialmenu:showNotify',_source, 'Bank', 'Übwerweisen', 'du hast nicht genug Geld auf deiner Bank',  'CHAR_BANK_MAZE')
+              TriggerClientEvent('esx:showAdvancedNotification', _source, Language['Bank'], Language['Transfer'], Language['NotEnoughMoney'], Language['NotifyIcon'], 3)
             else 
                 xPlayer.removeAccountMoney('bank', amount)
                 xTarget.addAccountMoney('bank', amount)
-                TriggerClientEvent('bcs_radialmenu:showNotify',_source, 'Bank', 'Übwerweisen', 'Du hast: ~g~' ..amount.. '~w~$ Geld an ' ..xTarget.getName().. 'gesendet',  'CHAR_BANK_MAZE')
-                TriggerClientEvent('bcs_radialmenu:showNotify',Target, 'Bank', 'Übwerweisen', 'Du hast: ~g~' ..amount.. '~w~$ Geld von ' ..xPlayer.getName().. 'bekommen',  'CHAR_BANK_MAZE')
+                TriggerClientEvent('esx:showAdvancedNotification', _source, Language['Bank'], Language['Transfer'], Language['TransferSource'], Language['NotifyIcon'], 3)
+                TriggerClientEvent('esx:showAdvancedNotification', Target, Language['Bank'], Language['Transfer'], Language['TransferTarget'], Language['NotifyIcon'], 3)
             end
         else 
-            TriggerClientEvent('bcs_radialmenu:showNotify',Target, 'Bank', 'Übwerweisen', 'Du kannst dir selber kein Geld überweisen',  'CHAR_BANK_MAZE')
+          TriggerClientEvent('esx:showAdvancedNotification', Target, Language['Bank'], Language['Transfer'], Language['TransferToSelf'], Language['NotifyIcon'], 3)
         end
      else
-        TriggerClientEvent('bcs_radialmenu:showNotify',Target, 'Bank', 'Übwerweisen', 'Dieser Spieler existiert nicht',  'CHAR_BANK_MAZE')
+      TriggerClientEvent('esx:showAdvancedNotification', Target, Language['Bank'], Language['Transfer'], Language['PlayerNotExists'], Language['NotifyIcon'], 3)
      end
 end)
 

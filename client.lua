@@ -11,11 +11,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
---Debug
---[[RegisterCommand("keybinds", function(source, args)
-    SetDisplay(not display)
-end)]]--
-
 RegisterNUICallback("exit", function(data)
     SetDisplay(false)
 end)
@@ -26,12 +21,12 @@ end)
 Citizen.CreateThread(function()
     while display do
         Citizen.Wait(0)
-        DisableControlAction(0, 1, display) 
-        DisableControlAction(0, 2, display) 
-        DisableControlAction(0, 142, display) 
-        DisableControlAction(0, 18, display) 
-        DisableControlAction(0, 322, display) 
-        DisableControlAction(0, 106, display) 
+        DisableControlAction(0, 1, display)
+        DisableControlAction(0, 2, display)
+        DisableControlAction(0, 142, display)
+        DisableControlAction(0, 18, display)
+        DisableControlAction(0, 322, display)
+        DisableControlAction(0, 106, display)
     end
 end)
 
@@ -63,7 +58,7 @@ Citizen.CreateThread(function()
 			Wait(350)
 		end
 		if IsAt then
-			ESX.ShowHelpNotification("Drücke ~INPUT_CONTEXT~ um die Bank zu benutzten")
+			ESX.ShowHelpNotification(Language['PressE'])
 
 			if IsControlJustReleased(0, 38) then
 				TriggerServerEvent('sa_banking:GetBalance')
@@ -126,7 +121,6 @@ AddEventHandler('sa_banking:SendNUI', function(balance, name, bool)
     SetDisplay(true, balance, name)
 end)
 
---Auszahlen
 RegisterNUICallback("Withdraw", function(data, cb)
     SetDisplay(false)
     local amount = data.WithdrawAmount
@@ -134,7 +128,6 @@ RegisterNUICallback("Withdraw", function(data, cb)
 	TriggerServerEvent('sa_banking:Withdraw', amount)
 end)
 
---Einzahlen
 RegisterNUICallback("Deposit", function(data, cb)
     SetDisplay(false)
     local amount = data.WithdrawAmount
@@ -143,7 +136,6 @@ RegisterNUICallback("Deposit", function(data, cb)
 	print(amount)
 end)
 
---Einzahlen
 RegisterNUICallback("transfer", function(data, cb)
     SetDisplay(false)
     local amount = data.transferAmount

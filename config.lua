@@ -2,8 +2,30 @@ Config = {}
 
 Config.Blips = false
 
-Config.banks = {
+Language = {
+	--Notify Bankicon
+	['NotifyIcon'] = 'CHAR_BANK_MAZE',
+	['Money'] = '$',
 
+	--Normal translate
+    ['Bank'] = 'Bank',
+	['Withdraw'] = 'Withdraw',
+	['Deposit'] = 'Deposit',
+	['Transfer'] = 'Transfer',
+	['NotEnoughMoney'] = 'You do not have enough money',
+	['NotValid'] = 'You did not enter a valid amount',
+	['WithdrawMoney'] = 'You withdrawed: ',
+	['DepositMoney'] = 'You Deposited: ',
+	['TransferSource'] = 'You transfered: ~g~ %(amount) ~w~$ to %(xTarget.getName())',
+	['TransferTarget'] = 'You got: ~g~ %(amount) ~w~$ from %(xPlayer.getName())',
+	['TransferToSelf'] = 'You cannot transfer money to yourself',
+	['PlayerNotExists'] = 'Player does not exit',
+	['PressE'] = 'Press ~INPUT_CONTEXT~ to open bank'
+
+}
+
+
+Config.banks = {
     {x=-386.733, y=6045.953, z=31.501},
 	{x=-284.037, y=6224.385, z=31.187},
 	{x=-284.037, y=6224.385, z=31.187},

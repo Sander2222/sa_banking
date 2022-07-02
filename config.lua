@@ -1,6 +1,6 @@
 Config = {}
 
-Config.Blips = false
+Config.Blips = true
 
 Language = {
 	--Notify Bankicon

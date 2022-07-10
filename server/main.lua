@@ -69,7 +69,7 @@ AddEventHandler('sa_banking:Transfer', function(amount, Target)
     amount = tonumber(amount)
 
      if xTarget == nil and GetPlayerEndpoint(Target) ~= nil then
-        --idk warum das funktioniert, aber es funktioniert
+        --idk why this is working, but it works lol
         if xPlayer == xTarget then
             if balance <= 0 or balance < amount or amount <= 0 then
               TriggerClientEvent('esx:showAdvancedNotification', _source, Language['Bank'], Language['Transfer'], Language['NotEnoughMoney'], Language['NotifyIcon'], 3)

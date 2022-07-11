@@ -39,7 +39,7 @@ Citizen.CreateThread(function()
 		IsAt = false
 
         for key, value in ipairs(Config.banks) do
-            local dist = GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), vector3(value.x, value.y, value.z))
+            local dist = GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), vector3(value.x, value.y, value.z))
 
             if dist <= 2.0 then
 					IsClose = true

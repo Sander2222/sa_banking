@@ -1,6 +1,7 @@
 Config = {}
 
 Config.Blips = true
+Config.BlipSize = 0.7
 
 Language = {
 	--Notify Bankicon

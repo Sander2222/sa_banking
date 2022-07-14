@@ -68,9 +68,9 @@ AddEventHandler('sa_banking:Transfer', function(amount, Target)
     local xPlayerBank = xPlayer.getAccount('bank').money
     amount = tonumber(amount)
 
-     if xTarget == nil and GetPlayerEndpoint(Target) ~= nil then
+     if xTarget ~= nil and GetPlayerEndpoint(Target) ~= nil then
         --idk why this is working, but it works lol
-        if xPlayer == xTarget then
+        if tonumber(_source) ~= tonumber(Target) then
             if balance <= 0 or balance < amount or amount <= 0 then
               TriggerClientEvent('esx:showAdvancedNotification', _source, Language['Bank'], Language['Transfer'], Language['NotEnoughMoney'], Language['NotifyIcon'], 3)
             else 
@@ -80,10 +80,12 @@ AddEventHandler('sa_banking:Transfer', function(amount, Target)
                 TriggerClientEvent('esx:showAdvancedNotification', Target, Language['Bank'], Language['Transfer'], Language['TransferTarget'] ..amount.. Language['Money'], Language['NotifyIcon'], 3)
             end
         else 
-          TriggerClientEvent('esx:showAdvancedNotification', Target, Language['Bank'], Language['Transfer'], Language['TransferToSelf'], Language['NotifyIcon'], 3)
+          TriggerClientEvent('esx:showAdvancedNotification', _source, Language['Bank'], Language['Transfer'], Language['TransferToSelf'], Language['NotifyIcon'], 3)
         end
      else
-      TriggerClientEvent('esx:showAdvancedNotification', Target, Language['Bank'], Language['Transfer'], Language['PlayerNotExists'], Language['NotifyIcon'], 3)
+      TriggerClientEvent('esx:showAdvancedNotification', _source, Language['Bank'], Language['Transfer'], Language['PlayerNotExists'], Language['NotifyIcon'], 3)
      end
 end)
+
+
 
